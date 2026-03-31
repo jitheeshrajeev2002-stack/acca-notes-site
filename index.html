@@ -1,0 +1,51 @@
+<!-- index.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ACCA Notes Hub</title>
+<style>
+  body { font-family: sans-serif; margin: 0; padding: 40px; background: #f4f6f8; color: #0a2540; display:flex; flex-direction: column; align-items:center;}
+  h1 {color:#004080; font-size:2.8rem; margin-bottom:40px;}
+  .boxes {display:flex; gap:30px; flex-wrap:wrap; justify-content:center;}
+  .box {background:white; border:2px solid #0073e6; border-radius:12px; width:240px; height:140px; display:flex; justify-content:center; align-items:center; font-weight:700; font-size:1.4rem; color:#004080; cursor:pointer; transition:0.3s;}
+  .box:hover {background:#0073e6; color:white;}
+  #professionalSubmenu {margin-top:30px; display:none; flex-wrap:wrap; gap:20px; justify-content:center;}
+  .submenu-item {background:#e6f0ff; border:2px solid #004080; border-radius:10px; padding:12px 24px; font-weight:600; font-size:1.1rem; color:#004080; cursor:pointer; transition:0.3s;}
+  .submenu-item:hover {background:#004080; color:white;}
+</style>
+</head>
+<body>
+
+<h1>ACCA Notes Hub</h1>
+
+<div class="boxes">
+  <div class="box" id="knowledgeBox">Knowledge</div>
+  <div class="box" id="skillBox">Skill</div>
+  <div class="box" id="professionalBox">Professional Level</div>
+</div>
+
+<div id="professionalSubmenu">
+  <div class="submenu-item" data-page="sbr.html">SBR</div>
+  <div class="submenu-item" data-page="sbl.html">SBL</div>
+  <div class="submenu-item" data-page="aaa.html">AAA</div>
+  <div class="submenu-item" data-page="atx.html">ATX</div>
+  <div class="submenu-item" data-page="apm.html">APM</div>
+  <div class="submenu-item" data-page="afm.html">AFM</div>
+</div>
+
+<script>
+const profBox = document.getElementById('professionalBox');
+const submenu = document.getElementById('professionalSubmenu');
+
+profBox.addEventListener('click', ()=>{submenu.style.display = submenu.style.display==='flex'? 'none':'flex';});
+submenu.querySelectorAll('.submenu-item').forEach(item=>{
+  item.addEventListener('click', ()=>{window.location.href=item.getAttribute('data-page');});
+});
+document.getElementById('knowledgeBox').addEventListener('click', ()=>{alert('Knowledge section coming soon!');});
+document.getElementById('skillBox').addEventListener('click', ()=>{alert('Skill section coming soon!');});
+</script>
+
+</body>
+</html>

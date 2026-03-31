@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>SBR PDFs Viewer</title>
+<style>
+  :root{
+    --acca-dark-blue:#004080;
+    --acca-light-blue:#0073e6;
+    --acca-gray:#f4f6f8;
+  }
+  body{
+    font-family:"Segoe UI", sans-serif;
+    margin:0;
+    padding:40px;
+    background:var(--acca-gray);
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+  }
+  header{
+    background:var(--acca-dark-blue);
+    width:100%;
+    padding:1.5rem;
+    text-align:center;
+    color:white;
+    font-size:2rem;
+    font-weight:700;
+    margin-bottom:30px;
+  }
+  label{
+    font-size:1.2rem;
+    margin-bottom:0.5rem;
+    display:block;
+  }
+  select{
+    width:100%;
+    max-width:700px;
+    padding:0.7rem 1rem;
+    font-size:1rem;
+    border:2px solid var(--acca-light-blue);
+    border-radius:5px;
+    margin-bottom:1rem;
+    cursor:pointer;
+  }
+  #downloadBtn{
+    width:100%;
+    max-width:700px;
+    padding:0.7rem 1rem;
+    font-size:1rem;
+    border:none;
+    border-radius:5px;
+    background:var(--acca-light-blue);
+    color:white;
+    cursor:pointer;
+    margin-bottom:1rem;
+  }
+  #downloadBtn:disabled{
+    background:#a9c8f9;
+    cursor:not-allowed;
+  }
+  iframe{
+    width:100%;
+    max-width:900px;
+    height:600px;
+    border:2px solid var(--acca-light-blue);
+    border-radius:8px;
+    background:white;
+  }
+</style>
+</head>
+<body>
+
+<header>SBR PDFs Viewer</header>
+
+<label for="pdfSelect">Select a PDF:</label>
+<select id="pdfSelect" onchange="loadPDF()">
+  <option value="">-- Select a PDF --</option>
+  <option value="https://drive.google.com/uc?export=download&id=1CbYmHQAd94Vovs9h0opjoBOwi2off4M4">SBR - BASIL SIR</option>
+  <option value="https://drive.google.com/uc?export=download&id=1tF9HojOpgS1ZgoH7NpzhfOCyaWWh_7LW">SBR - MISHAL SIR</option>
+  <option value="https://drive.google.com/uc?export=download&id=11Rw3YUm4amK8n0vtfxg-TVj5RphL0A4h">DECEMBER 2025</option>
+  <option value="https://drive.google.com/uc?export=download&id=1fgOgI9zctvPvNRnVYAKzJ16e7qd9G4xO">SBR MISHAL SIR SHORT NOTE</option>
+</select>
+
+<button id="downloadBtn" disabled>Download PDF</button>
+
+<iframe id="pdfViewer" style="display:none;"></iframe>
+
+<script>
+const pdfSelect = document.getElementById('pdfSelect');
+const iframe = document.getElementById('pdfViewer');
+const downloadBtn = document.getElementById('downloadBtn');
+
+function loadPDF(){
+  const url = pdfSelect.value;
+  if(url){
+    // Extract file ID to generate Google Drive preview URL
+    const fileId = url.match(/id=([^&]+)/)[1];
+    iframe.src = `https://drive.google.com/file/d/${fileId}/preview`;
+    iframe.style.display = 'block';
+
+    // Enable download button
+    downloadBtn.disabled = false;
+    downloadBtn.onclick = () => { window.open(url,'_blank'); };
+  } else {
+    iframe.src = '';
+    iframe.style.display = 'none';
+    downloadBtn.disabled = true;
+  }
+}
+</script>
+
+</body>
+</html>
